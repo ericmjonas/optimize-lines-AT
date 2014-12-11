@@ -2,6 +2,14 @@ import numpy as np
 import util
 import axfunc
 
+"""
+basic testing code -- because this explicitly instantiates the giant
+matrix A, it consumes a tremendous amount of memory. Therefor
+we only compare with small images and small atomic sets
+
+"""
+
+
 sc = util.create_iter_scene_config(32, 32,  10)
 ac = util.create_real_atom_config(sc, XGRID_N=40, Y_GRID=40,  ZGRID_N=10)
 
