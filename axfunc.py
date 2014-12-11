@@ -58,9 +58,9 @@ def get_field(sc, img):
     Y_N = sc['y'][2]
 
 
-    b = np.reshape(img, (UY_N, UX_N, Y_N, X_N))
-
-    return b
+    #b = np.reshape(img, (UY_N, UX_N, Y_N, X_N))
+    assert img.shape == (UY_N, UX_N, Y_N, X_N)
+    return img
 
 
 @numba.jit(nopython=True)
@@ -98,7 +98,8 @@ def create_ux_grid(uxstart, uxstep, uxn,
                 xkern[tgt_ux_i, xg_i, i] = c* np.exp(v )
                 x += xstep
         ux += uxstep 
-    
+
+@profile    
 def compute_ATx(ac, sc, data):
 
     x_grid_points = ac['x']

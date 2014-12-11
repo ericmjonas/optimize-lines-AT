@@ -2,21 +2,20 @@ import numpy as np
 import numba
 import time
 
-def create_iter_scene_config(X_N=100, Y_N=100, uxn=5) :
+def create_iter_scene_config(X_N=100, Y_N=100, UX_N=32, UY_N=32) :
     """
     From herbert's notes
     everything in um
     """
 
 
-    UX_N = uxn
     DATA_Y_POINT = 0.0
 
     diffusor_depth = 1000.0
     return  {'x' : (-150.0, 300.0/X_N, X_N), 
-             'y' : (-150.0, 300.0/Y_N, 1.0, Y_N), 
+             'y' : (-150.0, 300.0/Y_N, Y_N), 
              'ux' : (-0.18, 0.36/UX_N, UX_N), 
-             'uy' : (-0.18, 0.36/UX_N, UX_N), 
+             'uy' : (-0.18, 0.36/UY_N, UY_N), 
              'iter' : True,
              'sigma' : 0.00712,
              'lambda' : 0.5,
@@ -26,7 +25,7 @@ def create_iter_scene_config(X_N=100, Y_N=100, uxn=5) :
              'sigma_0' : 1.0} 
 
 
-def create_real_atom_config(sc, XGRID_N=30, Y_GRID=30, ZGRID_N=20):
+def create_real_atom_config(sc, XGRID_N=30, YGRID_N=30, ZGRID_N=20):
 
     MIN_X = -150
     MAX_X = 150
@@ -36,7 +35,7 @@ def create_real_atom_config(sc, XGRID_N=30, Y_GRID=30, ZGRID_N=20):
     MAX_Z = 900
 
     X_GRID = np.linspace(MIN_X, MAX_X, XGRID_N).astype(np.float32)
-    Y_GRID = np.linspace(MIN_X, MAX_X, XGRID_N).astype(np.float32)
+    Y_GRID = np.linspace(MIN_X, MAX_X, YGRID_N).astype(np.float32)
     Z_GRID = np.linspace(MIN_Z, MAX_Z, ZGRID_N).astype(np.float32)
 
     return {'x': X_GRID,
